@@ -633,7 +633,7 @@ Session.prototype = {
 
     this.receiveResponse = this.receiveReinviteResponse;
     //REVISIT
-    this.mediaHandler.getDescription(self.mediaHint)
+    this.mediaHandler.getDescription(self.mediaHint, options.RTCConstraints)
     .then(mangle)
     .then(
       function(body){

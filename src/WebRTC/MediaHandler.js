@@ -211,8 +211,11 @@ MediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
   /**
    * @param {SIP.WebRTC.MediaStream | (getUserMedia constraints)} [mediaHint]
    *        the MediaStream (or the constraints describing it) to be used for the session
+   * @param {RTCOfferOptions} [offerOptions]
+   *        the RTCOfferOptions to be used for the session (defaults to the
+   *        currently set RTCConstraints)
    */
-  getDescription: {writable: true, value: function getDescription (mediaHint) {
+  getDescription: {writable: true, value: function getDescription (mediaHint, offerOptions) {
     var self = this;
     var acquire = self.mediaStreamManager.acquire;
     if (acquire.length > 1) {
@@ -270,7 +273,7 @@ MediaHandler.prototype = Object.create(SIP.MediaHandler.prototype, {
         }
 
         self.render();
-        return self.createOfferOrAnswer(self.RTCConstraints);
+        return self.createOfferOrAnswer(offerOptions || self.RTCConstraints);
       })
     ;
   }},
